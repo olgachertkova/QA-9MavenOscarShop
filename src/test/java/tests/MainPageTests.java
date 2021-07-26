@@ -9,17 +9,17 @@ import pages.MainPageHelper;
 public class MainPageTests extends TestBase{
     MainPageHelper mainPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage(){
         mainPage = PageFactory.initElements(driver, MainPageHelper.class);
     }
 
-    @Test(priority = 2)
-    public void changeLanguageTest(){
-        mainPage.selectLanguage("ru");
+    @Test(priority = 2, dataProviderClass = DataProviders.class, dataProvider = "usingFile")
+    public void changeLanguageTest(String lang, String buttonText){
+        mainPage.selectLanguage(lang);
         mainPage.clickOnGoButton();
         String text = mainPage.getViewBasketButtonText();
-        Assert.assertEquals(text, "Посмотреть корзину");
+        Assert.assertEquals(text, buttonText);
     }
 
     @Test(priority = 1)

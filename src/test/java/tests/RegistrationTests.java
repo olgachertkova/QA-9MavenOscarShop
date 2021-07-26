@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.MainPageHelper;
 import pages.RegistrationPageHelper;
@@ -25,7 +26,7 @@ public class RegistrationTests extends TestBase{
         mainPageHelper = PageFactory.initElements(driver, MainPageHelper.class);
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false)
     public void registrationTest() {
         mainPageHelper.clickOnLoginOrRegisterLink();
         registrationPageHelper.waitUntilPageIsLoaded();
@@ -38,8 +39,9 @@ public class RegistrationTests extends TestBase{
 
     }
 
-    @Test(priority = 2, dependsOnMethods = "registrationTest")
-    public void loginTest() {
+    @Test(priority = 2/*, dependsOnMethods = "registrationTest"*/)
+    @Parameters({"email", "password"})
+    public void loginTest(String email, String password) {
         WebElement loginLink = driver.findElement(By.id("login_link"));
         loginLink.click();
         WebElement loginEmailField = driver.findElement(By.xpath("//input[@id='id_login-username']"));

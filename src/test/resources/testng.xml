@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Tests" verbose="5">
+    <test name="Test1">
+        
+        <classes>
+            <class name="tests.RegistrationTests">
+                <parameter name="email"  value="qwe123123123@gmail.com" />
+                <parameter name="password"  value="Qwe123123" />
+            </class>
+            <class name="tests.MainPageTests"></class>
+            <class name="tests.OscarProductTests"></class>
+        </classes>
+    </test>
+</suite>
