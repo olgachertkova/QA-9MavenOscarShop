@@ -1,11 +1,16 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.util.List;
 import java.util.Random;
@@ -106,6 +111,28 @@ public abstract class PageBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void takeSnapShot(WebDriver webdriver, Method method) throws Exception{
+
+        //Convert web driver object to TakeScreenshot
+        TakesScreenshot scrShot =((TakesScreenshot)webdriver);
+
+        //Call getScreenshotAs method to create image file
+        File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+
+        //Create new file name
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        String curDate = formatter.format(date);
+        String filePath = "screenshots/" + method.getName() + curDate +".png";
+
+        //Move image file to new destination
+        File DestFile=new File(filePath);
+
+        //Copy file at destination
+        FileUtils.copyFile(SrcFile, DestFile);
+
     }
 
 

@@ -6,13 +6,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+
+import static pages.PageBase.takeSnapShot;
 
 public class TestBase {
     WebDriver driver;
@@ -30,11 +31,12 @@ public class TestBase {
         }
     }
     @AfterMethod(alwaysRun = true)
-    public void closeBrowser(ITestResult result, Method method){
+    public void closeBrowser(ITestResult result, Method method) throws Exception {
         if(result.isSuccess()){
             logger.info("Test result: PASSED");
         }else{
             logger.error("Test result: FAILED");
+            takeSnapShot(driver, method);
         }
         logger.info("Stop test: " + result.getMethod().getMethodName());
         logger.info("======================================================");
