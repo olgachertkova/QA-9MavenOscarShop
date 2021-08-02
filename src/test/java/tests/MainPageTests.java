@@ -14,7 +14,7 @@ public class MainPageTests extends TestBase{
         mainPage = PageFactory.initElements(driver, MainPageHelper.class);
     }
 
-    @Test(priority = 2, dataProviderClass = DataProviders.class, dataProvider = "usingFile")
+    @Test(priority = 2, dataProviderClass = DataProviders.class, dataProvider = "usingFile", groups = {"smoke"})
     public void changeLanguageTest(String lang, String buttonText){
         mainPage.selectLanguage(lang);
         mainPage.clickOnGoButton();

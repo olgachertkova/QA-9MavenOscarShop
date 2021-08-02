@@ -3,6 +3,7 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +22,10 @@ public class TestBase {
 
     @BeforeMethod(alwaysRun = true)
     public void openBrowser(Method m, Object[] p){
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("headless");
+        options.addArguments("window-size=1800x900");
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("http://selenium1py.pythonanywhere.com/en-gb/");

@@ -26,7 +26,7 @@ public class RegistrationTests extends TestBase{
         mainPageHelper = PageFactory.initElements(driver, MainPageHelper.class);
     }
 
-    @Test(priority = 1, enabled = false)
+    @Test(priority = 1, enabled = false, groups = {"smoke"})
     public void registrationTest() {
         mainPageHelper.clickOnLoginOrRegisterLink();
         registrationPageHelper.waitUntilPageIsLoaded();
